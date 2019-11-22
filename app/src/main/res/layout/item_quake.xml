@@ -4,21 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.main.PlaceholderFragment">
-
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/activity_horizontal_margin"
-        android:layout_marginTop="@dimen/activity_vertical_margin"
-        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="@dimen/activity_vertical_margin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/constraintLayout"
-        tools:layout_constraintLeft_creator="1"
-        tools:layout_constraintTop_creator="1" />
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/magnitude"
@@ -29,33 +15,32 @@
         android:layout_marginTop="35dp"
         android:saveEnabled="false"
         android:scrollHorizontally="false"
-        android:text="magnitude"
+        android:text="4.3"
+        android:textSize="55sp"
+        android:typeface="monospace"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
+    <TextView
+        android:id="@+id/earthquakeTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="35dp"
+        android:text="earthquakeTime"
+        app:layout_constraintStart_toEndOf="@+id/magnitude"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/earthquakeLocation"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="39dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
+        android:layout_marginTop="56dp"
+        android:text="earthquakeLocation"
         app:layout_constraintStart_toEndOf="@+id/magnitude"
-        app:layout_constraintTop_toBottomOf="@+id/eartquakeTime" />
-
-    <EditText
-        android:id="@+id/eartquakeTime"
-        android:layout_width="132dp"
-        android:layout_height="24dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="35dp"
-        android:ems="10"
-        android:inputType="time"
-        app:layout_constraintStart_toEndOf="@+id/magnitude"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/earthquakeTime" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
