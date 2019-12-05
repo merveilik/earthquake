@@ -23,18 +23,43 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
-        <androidx.recyclerview.widget.RecyclerView
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="45dp"
-            tools:listitem="@layout/item_quake"
-            android:id="@+id/earthquakeList"/>
+            android:text="Choose your city"
+            android:gravity="center"
+            android:textSize="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"/>
+            <Button
+                android:id="@+id/okb"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:onClick="getText"
+                android:text="OK"/>
+        </LinearLayout>
+
+
+
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/cityList"/>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,6 +86,6 @@
 
         </LinearLayout>
 
-    </RelativeLayout>
+    </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

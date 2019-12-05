@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.alertquake.adapter.EarthquakeAdapter;
 import com.example.alertquake.adapter.GuideAdapter;
 
 public class GuideActivity extends AppCompatActivity {

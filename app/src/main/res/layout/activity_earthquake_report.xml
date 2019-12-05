@@ -8,7 +8,15 @@
     android:gravity="center_vertical"
     android:background="#e3e3e3"
     tools:context=".EarthquakeReportActivity">
-
+    <Spinner
+        android:id="@+id/spinner1"
+        android:layout_width="370sp"
+        android:layout_height="wrap_content"
+        android:background="#F7B903"
+        android:layout_marginLeft="0sp"
+        android:spinnerMode="dropdown"
+        android:layout_marginBottom="45sp"
+        android:theme="@style/ThemeOverlay.AppCompat.Light"/>
     <EditText
         android:id="@+id/et_report"
         android:layout_width="match_parent"
@@ -16,7 +24,7 @@
         android:minLines="10"
         android:inputType="textMultiLine"
         android:background="#ffffff"
-        android:hint="Please tell us the event" />
+        android:hint="What happened?" />
 
     <Button
         android:id="@+id/btn_report"
@@ -26,5 +34,8 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="#ba160c"
         android:text="Report" />
+
+
+
 
 </LinearLayout>

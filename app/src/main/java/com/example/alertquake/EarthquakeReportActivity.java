@@ -2,19 +2,30 @@ package com.example.alertquake;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.example.alertquake.model.City;
+
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 
 public class EarthquakeReportActivity extends AppCompatActivity {
 
@@ -24,9 +35,12 @@ public class EarthquakeReportActivity extends AppCompatActivity {
     private static PrintWriter printWriter;
     private static InputStreamReader input;
     private static BufferedReader br;
-
-    String message = "";
-    private static String ip = "193.140.194.16";
+    ArrayList<String> cityNames;
+    private BufferedReader in;
+    private BufferedWriter out;
+    private static int PORT = 51564;
+    private static String ipAddress = "192.168.43.76";
+    String name;
 
 
     @Override
@@ -36,8 +50,29 @@ public class EarthquakeReportActivity extends AppCompatActivity {
         final EditText etReport = findViewById(R.id.et_report);
         Button btnReport = findViewById(R.id.btn_report);
         e1 = (EditText)findViewById(R.id.et_report);
+        cityNames = new ArrayList<String>();
+        for(int i = 0; i<MainActivity.cityList.size(); i++){
+            cityNames.add(MainActivity.cityList.get(i).getName());
+        }
+        Spinner spin = (Spinner) findViewById(R.id.spinner1);
+        spin.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                name = cityNames.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
+        //Creating the ArrayAdapter instance having the bank name list
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,cityNames);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(aa);
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -45,11 +80,23 @@ public class EarthquakeReportActivity extends AppCompatActivity {
 
                 if (!text.isEmpty()) {
                     // TODO: Request
-                    sendText(text);
-                    finish();
                     Toast.makeText(getApplicationContext(),
                             "Your message is sent.",
                             Toast.LENGTH_SHORT).show();
+                    try {
+                        Socket socket = new Socket(ipAddress, PORT);
+                        PrintStream out2 = new PrintStream(socket.getOutputStream());
+                        out2.println("type:report:"+name);
+
+
+                        socket.close();
+
+                        new Handler().postDelayed(()->{
+                            startActivity(new Intent(EarthquakeReportActivity.this, MainActivity.class));
+                        },2000);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 } else {
                     Toast.makeText(getApplicationContext(),
                             "Please type a message",
@@ -59,36 +106,11 @@ public class EarthquakeReportActivity extends AppCompatActivity {
         });
     }
 
-    public void sendText(String message) {
-        myTask mt = new myTask();
-        mt.execute();
-        if(!message.isEmpty()) {
-            Toast.makeText(getApplicationContext(),
-                    "Your message is sent.",
-                    Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    class myTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Void... voids) {
-            try {
-                s = new Socket(ip,5000);
-                printWriter = new PrintWriter(s.getOutputStream());
-                printWriter.write(message);
-                printWriter.flush();
-                printWriter.close();
-                s.close();
-
-
-            }
-            catch(IOException e) {
-                e.printStackTrace();
-            }
-
-            return null;
-        }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(EarthquakeReportActivity.this, MainActivity.class));
+        finish();
     }
 }
 
