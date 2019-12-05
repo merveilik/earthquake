@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
 
         handler.post(this::doInBackground);
         handler.post(this::popUp);
-        
+
     }
 
     public void getText(View view){
@@ -134,18 +134,18 @@ public class MainActivity extends AppCompatActivity {
 
             cityList.clear();
             while (scanner.hasNext()){
+
                 String name = scanner.next();
+                if(name.equals("&&")) {
+                    break;
+                }
                 String counters = scanner.next();
                 String messages = scanner.next();
                 int counter = Integer.parseInt(counters);
                 City c = new City(name,counter,messages);
                 cityList.add(c);
-                Log.i("CEMAL",""+name+" "+cityList.size());
 
                 cityNames.add(name);
-
-                if(name.equals("Konya"))
-                    break;
             }
 
             runOnUiThread(() -> {
@@ -179,21 +179,18 @@ public class MainActivity extends AppCompatActivity {
 
                         while (scanner.hasNext()) {
                             String name = scanner.next();
-
+                            if(name.equals("&&")) {
+                                break;
+                            }
                             String counters = scanner.next();
                             String messages = scanner.next();
                             int counter = Integer.parseInt(counters);
-
                             if (name.equals(myCity) && counter >= 10) {
-                                mediaPlayer.start(); // no need to call prepare(); create() does that for you
+                                mediaPlayer.start();
 
                             }
-
-                            if (name.equals("Konya"))
-                                break;
                         }
                         Log.i("ASDASD", "hey");
-
 
                         socket.close();
                     } catch (IOException e) {
@@ -201,12 +198,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     handler.postDelayed(this, 3000);
                 }
-
-
-
             }
         }, 1000);
     }
-
-
 }

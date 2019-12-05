@@ -41,8 +41,5 @@ public class MessageActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.msg_list);
         listView.setAdapter(itemsAdapter);
 
-
-
-
     }
 }

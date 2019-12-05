@@ -68,10 +68,8 @@ public class EarthquakeReportActivity extends AppCompatActivity {
         });
 
 
-        //Creating the ArrayAdapter instance having the bank name list
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,cityNames);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        //Setting the ArrayAdapter data on the Spinner
         spin.setAdapter(aa);
         btnReport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,8 +84,8 @@ public class EarthquakeReportActivity extends AppCompatActivity {
                     try {
                         Socket socket = new Socket(ipAddress, PORT);
                         PrintStream out2 = new PrintStream(socket.getOutputStream());
-                        out2.println("type:report:"+name);
-
+                        out2.println("type:report:"+name+":"+text);
+                        //out2.println("type:report:"+name);
 
                         socket.close();
 
