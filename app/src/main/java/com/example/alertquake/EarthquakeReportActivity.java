@@ -38,8 +38,8 @@ public class EarthquakeReportActivity extends AppCompatActivity {
     ArrayList<String> cityNames;
     private BufferedReader in;
     private BufferedWriter out;
-    private static int PORT = 51564;
-    private static String ipAddress = "192.168.43.76";
+    private static int PORT = 80;
+    private static String ipAddress = "34.65.254.96";
     String name;
 
 
@@ -67,7 +67,6 @@ public class EarthquakeReportActivity extends AppCompatActivity {
             }
         });
 
-
         ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,cityNames);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin.setAdapter(aa);
@@ -84,8 +83,8 @@ public class EarthquakeReportActivity extends AppCompatActivity {
                     try {
                         Socket socket = new Socket(ipAddress, PORT);
                         PrintStream out2 = new PrintStream(socket.getOutputStream());
-                        out2.println("type:report:"+name+":"+text);
-                        //out2.println("type:report:"+name);
+                        //out2.println("type:report:"+name+":"+text);
+                        out2.println("type:report:"+name);
 
                         socket.close();
 

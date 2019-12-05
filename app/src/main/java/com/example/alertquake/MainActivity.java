@@ -35,8 +35,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-    public final String IP_ADRESS = "192.168.43.76";
-    public final int PORT = 51564;
+    public final String IP_ADRESS = "34.65.254.96";
+    public final int PORT = 80;
     public static ArrayList<City> cityList;
     private BufferedReader in;
     private BufferedWriter out;
@@ -146,11 +146,11 @@ public class MainActivity extends AppCompatActivity {
                 cityList.add(c);
 
                 cityNames.add(name);
+                runOnUiThread(() -> {
+                    adapter.notifyDataSetChanged();
+                });
             }
 
-            runOnUiThread(() -> {
-                adapter.notifyDataSetChanged();
-            });
 
             socket.close();
         } catch (IOException e) {
@@ -190,7 +190,6 @@ public class MainActivity extends AppCompatActivity {
 
                             }
                         }
-                        Log.i("ASDASD", "hey");
 
                         socket.close();
                     } catch (IOException e) {
