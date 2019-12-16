@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-    public final String IP_ADRESS = "34.65.254.96";
+    public final String IP_ADRESS = "172.20.10.3";
     public final int PORT = 80;
     public static ArrayList<City> cityList;
     private BufferedReader in;
@@ -83,6 +83,9 @@ public class MainActivity extends AppCompatActivity {
                 City city= cityList.get(position);
                 Toast.makeText(MainActivity.this, ""+city.getName(), Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(MainActivity.this, MessageActivity.class);
+                /*if (city.getMessage().isEmpty()) {
+                    i.putExtra("msg","NO MESSAGES FOR THIS CITY");
+                }*/
                 i.putExtra("msg",city.getMessage());
                 startActivity(i);
 
