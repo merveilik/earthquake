@@ -40,7 +40,7 @@ public class EarthquakeReportActivity extends AppCompatActivity {
     private BufferedReader in;
     private BufferedWriter out;
     private static int PORT = 80;
-    private static String ipAddress = "172.20.10.3";
+    private static String ipAddress = "34.65.254.96";
     String name;
 
 
