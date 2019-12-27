@@ -35,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MainActivity extends AppCompatActivity {
-    public final String IP_ADRESS = "34.65.254.96";
+    public final String IP_ADRESS = "172.20.10.3";
     public final int PORT = 80;
     public static ArrayList<City> cityList;
     private BufferedReader in;

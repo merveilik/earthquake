@@ -40,7 +40,7 @@ public class EarthquakeReportActivity extends AppCompatActivity {
     private BufferedReader in;
     private BufferedWriter out;
     private static int PORT = 80;
-    private static String ipAddress = "34.65.254.96";
+    private static String ipAddress = "172.20.10.3";
     String name;
 
 
@@ -84,6 +84,7 @@ public class EarthquakeReportActivity extends AppCompatActivity {
                     try {
                         Socket socket = new Socket(ipAddress, PORT);
                         PrintStream out2 = new PrintStream(socket.getOutputStream());
+                        text = text.replaceAll(" ", "*");
                         out2.println("type:report:"+name+":"+text);
                         //out2.println("type:report:"+name);
 

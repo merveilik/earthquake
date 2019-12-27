@@ -23,14 +23,19 @@ public class MessageActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         String msg = intent.getStringExtra("msg");
-        msg = msg.substring(9);
 
         String s = "";
         for(int i=0;i<msg.length(); i++){
             if(msg.charAt(i)!=':'){
-                s+=msg.charAt(i);
+                if(msg.charAt(i)=='*'){
+                    s+=" ";
+                }
+                else {
+                    s+=msg.charAt(i);
+                }
             } else{
-                msgs.add(s);
+                if(s.length() != 0)
+                    msgs.add(s);
                 s="";
             }
         }
